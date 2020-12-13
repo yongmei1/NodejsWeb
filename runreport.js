@@ -9,8 +9,6 @@ process.stdout.on('data', data=>{
 });
 
 
-
-
 /*var PythonShell = require('python-shell');
 
 PythonShell.run('house_price_predictions.py', function (err) {

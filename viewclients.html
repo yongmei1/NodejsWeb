@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            html{
+                color:white;
+            }
+            body {
+                background-image: url(fullbackimage2.jpg);
+                    background-repeat:no-repeat;
+                   background-size:cover;
+            } 
+            h1{
+                text-align: center;
+            }
+            div{
+                float : right;
+            }
+            .button {
+                background-color: #555555;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                }
+            </style>
+
+        <title>View Clients Page</title>  
+  
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
+
+    </head>
+    <body>
+        <h1>View Clients</h1> 
+           
+        <div>   
+            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+            <button class = "button" onclick = " " value = "submit">Submit</button> 
+        </div><br><br>
+        
+            Email <input id = "emailbox" type="text"><br><br>
+            Client ID <input id = "IDbox" type="text"><br><br>
+            <button id="select">SELECT</button><br><br>
+            <button id="insert">INSERT</button><br><br>
+            <button id="delete">DELETE</button><br><br>
+            <button id="update">UPDATE</button><br><br>
+         
+        <h1 id = "bigOne"></h1> 
+
+        <script> 
+     
+        var firebaseConfig = {
+            apiKey: "AIzaSyACPL6AK5ais6oLbrRi7VIb3VLW1lSeCNU",
+            authDomain: "finaisystem.firebaseapp.com",
+            databaseURL: "https://finaisystem.firebaseio.com",
+            projectId: "finaisystem",
+            storageBucket: "finaisystem.appspot.com",
+            messagingSenderId: "248168444493",
+            appId: "1:248168444493:web:ed04ddf7469898c0a82204",
+            measurementId: "G-5DTT5JN9DR"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        var bigOne = document.getElementById('bigOne');
+        var dbRef = firebase.database().ref().child('Client/0/clientID');
+        dbRef.on('value',snap => bigOne.innerText = snap.val());
+   
+        </script> 
+
+
+    </body>
+</html>
