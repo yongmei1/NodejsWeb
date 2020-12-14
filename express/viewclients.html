@@ -9,10 +9,10 @@
             }
             body {
                 background-image: url(/fullbackimage2.jpg);
-                    background-repeat:no-repeat;
-                   background-size:cover;
+                    background-repeat:  no-repeat 95% 50%;;
+                 //*  background-size:cover;*/
             } 
-            h1{
+            h1, h3{
                 text-align: center;
             }
             div{
@@ -33,28 +33,46 @@
             </style>
 
         <title>View Clients Page</title>  
-  
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
+
+        <script src ="/express/fireBase.js"></script> 
+        <script src ="/express/main.js"></script>  
 
     </head>
     <body>
+
+        
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
         <h1>View Clients</h1> 
            
         <div>   
-            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
-            <button class = "button" onclick = " " value = "submit">Submit</button> 
+            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button> 
         </div><br><br>
-        
-            Email <input id = "emailbox" type="text"><br><br>
-            Client ID <input id = "IDbox" type="text"><br><br>
-            <button id="select">SELECT</button><br><br>
-            <button id="insert">INSERT</button><br><br>
-            <button id="delete">DELETE</button><br><br>
-            <button id="update">UPDATE</button><br><br>
+
+
+        <form>
+
+            <label for="clientID">Client ID:</label>
+            <input type="text" id="clientID" name="clientID">
+            <button id="select">SELECT</button><br><br> 
          
-        <h1 id = "bigOne"></h1> 
+            </form>
+ <textarea> 
+        <h3 id = "bigOne"></h3> 
+        <h3 id = "second"></h3> 
+        <h3 id = "third"></h3> 
+        <h3 id = "fourth"></h3> 
+        <h3 id = "fifth"></h3> 
+        <h3 id = "sixth"></h3> 
+        <h3 id = "seventh"></h3> 
+        <h3 id = "eigth"></h3> 
+        <h3 id = "ninth"></h3> 
+        <h3 id = "tenth"></h3> 
+        <h3 id = "eleventh"></h3> 
+        <h3 id = "twefth"></h3> 
+ 
+    </textarea>
 
         <script> 
      
@@ -76,8 +94,52 @@
         var dbRef = firebase.database().ref().child('Client/0/clientID');
         dbRef.on('value',snap => bigOne.innerText = snap.val());
    
+        var second = document.getElementById('second');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/applicantincome');
+        dbRef.on('value',snap => second.innerText = snap.val());
+
+        var thrid = document.getElementById('third');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/credithistory');
+        dbRef.on('value',snap => third.innerText = snap.val());
+
+        var fourth = document.getElementById('fourth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/education');
+        dbRef.on('value',snap => fourth.innerText = snap.val());
+
+        var fifth = document.getElementById('fifth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/gender');
+        dbRef.on('value',snap => fifth.innerText = snap.val());
+
+        var sixth = document.getElementById('sixth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/married');
+        dbRef.on('value',snap => sixth.innerText = snap.val());
+
+        var seventh = document.getElementById('seventh');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/propertyarea');
+        dbRef.on('value',snap => seventh.innerText = snap.val());
+
+        var eighth = document.getElementById('eighth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/selfemployed');
+        dbRef.on('value',snap => bigOne.innerText = snap.val());
+
+        var ninth = document.getElementById('ninth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/loanamountterm');
+        dbRef.on('value',snap => ninth.innerText = snap.val());
+
+        var tenth = document.getElementById('tenth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/loanamount');
+        dbRef.on('value',snap => tenth.innerText = snap.val());
+
+        var eleventh = document.getElementById('eleventh');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/loanID');
+        dbRef.on('value',snap => eleventh.innerText = snap.val());
+
+        var twelfth = document.getElementById('twelfth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/dependants');
+        dbRef.on('value',snap => twelfth.innerText = snap.val());
         </script> 
 
+        
 
     </body>
 </html>
