@@ -9,8 +9,8 @@
             }
             body {
                 background-image: url(/fullbackimage2.jpg);
-                    background-repeat:  no-repeat 95% 50%;;
-                 //*  background-size:cover;*/
+                    background-repeat:  no-repeat;
+                   background-size:cover;
             } 
             h1, h3{
                 text-align: center;
@@ -32,10 +32,7 @@
                 }
             </style>
 
-        <title>View Clients Page</title>  
-
-        <script src ="/express/fireBase.js"></script> 
-        <script src ="/express/main.js"></script>  
+        <title>View Clients Page</title>    
 
     </head>
     <body>
@@ -46,33 +43,36 @@
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
         <h1>View Clients</h1> 
            
-        <div>   
-            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button> 
-        </div><br><br>
+        <div>    
+            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+        </div><br><br> 
 
-
-        <form>
-
-            <label for="clientID">Client ID:</label>
-            <input type="text" id="clientID" name="clientID">
-            <button id="select">SELECT</button><br><br> 
-         
-            </form>
- <textarea> 
-        <h3 id = "bigOne"></h3> 
-        <h3 id = "second"></h3> 
+                Client ID   <input id = "userinput"></input>
+                <button onclick= "getValue()"> Get client</button>
+           
+                <script>
+                    function getValue(){
+                    var id = document.getElementById("userinput").value;
+                    document.getElementById("userinput").nodeValue;
+                    document.write("you inputted the id: " + id);
+                    //-document.write("<br>");--/
+                    }
+                </script>
+          
+          <br><br><br>
+        <h3 id = "clientID"></h3>
+        <h3 id = "second"></h3>  
         <h3 id = "third"></h3> 
         <h3 id = "fourth"></h3> 
         <h3 id = "fifth"></h3> 
         <h3 id = "sixth"></h3> 
         <h3 id = "seventh"></h3> 
-        <h3 id = "eigth"></h3> 
+        <h3 id = "eighth"></h3> 
         <h3 id = "ninth"></h3> 
         <h3 id = "tenth"></h3> 
         <h3 id = "eleventh"></h3> 
-        <h3 id = "twefth"></h3> 
- 
-    </textarea>
+        <h3 id = "twelfth"></h3> 
+  
 
         <script> 
      
@@ -89,16 +89,18 @@
     
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+
         
-        var bigOne = document.getElementById('bigOne');
+        
+        var clientID = document.getElementById('clientID');
         var dbRef = firebase.database().ref().child('Client/0/clientID');
-        dbRef.on('value',snap => bigOne.innerText = snap.val());
+        dbRef.on('value',snap => clientID.innerText = snap.val()); 
    
         var second = document.getElementById('second');
         var dbRef = firebase.database().ref().child('FinancialHistory/0/applicantincome');
         dbRef.on('value',snap => second.innerText = snap.val());
 
-        var thrid = document.getElementById('third');
+        var third = document.getElementById('third');
         var dbRef = firebase.database().ref().child('FinancialHistory/0/credithistory');
         dbRef.on('value',snap => third.innerText = snap.val());
 
@@ -120,7 +122,7 @@
 
         var eighth = document.getElementById('eighth');
         var dbRef = firebase.database().ref().child('FinancialHistory/0/selfemployed');
-        dbRef.on('value',snap => bigOne.innerText = snap.val());
+        dbRef.on('value',snap => eighth.innerText = snap.val());
 
         var ninth = document.getElementById('ninth');
         var dbRef = firebase.database().ref().child('FinancialHistory/0/loanamountterm');
@@ -140,6 +142,10 @@
         </script> 
 
         
+
+        <script src ="/express/fireBase.js"></script> 
+        <script src ="/express/login.js"></script> 
+        <script src ="/express/main.js"></script>
 
     </body>
 </html>
