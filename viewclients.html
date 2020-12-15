@@ -33,14 +33,11 @@
             </style>
 
         <title>View Clients Page</title>    
-
-    </head>
-    <body>
-
-        
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>   
+    </head>
+    <body> 
         <h1>View Clients</h1> 
            
         <div>    
@@ -49,15 +46,7 @@
 
                 Client ID   <input id = "userinput"></input>
                 <button onclick= "getValue()"> Get client</button>
-           
-                <script>
-                    function getValue(){
-                    var id = document.getElementById("userinput").value;
-                    document.getElementById("userinput").nodeValue;
-                    document.write("you inputted the id: " + id);
-                    //-document.write("<br>");--/
-                    }
-                </script>
+            
           
           <br><br><br>
         <h3 id = "clientID"></h3>
@@ -75,6 +64,14 @@
   
 
         <script> 
+
+                function getValue(){
+                    var id = document.getElementById("userinput").value;
+                    var test = id.value;
+                    document.getElementById("userinput").nodeValue;
+                    document.write("you inputted the id: " + id);
+                    document.write("<br>");
+                    }
      
         var firebaseConfig = {
             apiKey: "AIzaSyACPL6AK5ais6oLbrRi7VIb3VLW1lSeCNU",
@@ -90,12 +87,15 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        
-        
+         
+       // str =  'Client' + id + 'clientID'; 
+      //  var str = id.value;
         var clientID = document.getElementById('clientID');
         var dbRef = firebase.database().ref().child('Client/0/clientID');
         dbRef.on('value',snap => clientID.innerText = snap.val()); 
-   
+      //  document.write('hiiiiiiiiiiiiiiii' + str);
+
+
         var second = document.getElementById('second');
         var dbRef = firebase.database().ref().child('FinancialHistory/0/applicantincome');
         dbRef.on('value',snap => second.innerText = snap.val());
@@ -139,13 +139,17 @@
         var twelfth = document.getElementById('twelfth');
         var dbRef = firebase.database().ref().child('FinancialHistory/0/dependants');
         dbRef.on('value',snap => twelfth.innerText = snap.val());
+
+
+        var database = firebase.database();
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('Client/' + userId).set({
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+  });
+}
         </script> 
-
-        
-
-        <script src ="/express/fireBase.js"></script> 
-        <script src ="/express/login.js"></script> 
-        <script src ="/express/main.js"></script>
-
+ 
     </body>
 </html>
