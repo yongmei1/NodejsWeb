@@ -1,0 +1,171 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            html{
+                color: white;
+            }
+            body {
+                background-image: url(/fullbackimage2.JPG);
+                    background-repeat:no-repeat;
+                   background-size:cover;
+            } 
+            div{
+                float : right;
+            }
+            h1{
+                text-align: center;
+            }
+            .button {
+                background-color: #555555;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                }
+            
+            </style>
+
+        <title>House predictions Page</title> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>   
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
+
+    </head>
+
+    <body>
+        <h1>Report for house prices</h1> 
+        
+        <div>    
+            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+        </div><br><br> 
+
+                Client ID   <input id = "userinput"></input>
+                <button onclick= "getValue()"> Get client</button>
+          
+          <br><br><br>
+        <h3 id = "bank"></h3>
+        <h3 id = "id"></h3>
+        <h3 id = "second"></h3>  
+        <h3 id = "third"></h3> 
+        <h3 id = "fourth"></h3> 
+        <h3 id = "fifth"></h3> 
+        <h3 id = "sixth"></h3> 
+        <h3 id = "seventh"></h3> 
+        <h3 id = "eighth"></h3> 
+        <h3 id = "ninth"></h3> 
+        <h3 id = "tenth"></h3> 
+        <h3 id = "eleventh"></h3> 
+        <h3 id = "twelfth"></h3> 
+  
+
+        <script> 
+
+                function getValue(){
+                    var id = document.getElementById("userinput").value;
+                    var test = id.value;
+                    document.getElementById("userinput").nodeValue;
+                    document.write("you inputted the id: " + id);
+                    document.write("<br>");
+                    }
+     
+        var firebaseConfig = {
+            apiKey: "AIzaSyACPL6AK5ais6oLbrRi7VIb3VLW1lSeCNU",
+            authDomain: "finaisystem.firebaseapp.com",
+            databaseURL: "https://finaisystem.firebaseio.com",
+            projectId: "finaisystem",
+            storageBucket: "finaisystem.appspot.com",
+            messagingSenderId: "248168444493",
+            appId: "1:248168444493:web:ed04ddf7469898c0a82204",
+            measurementId: "G-5DTT5JN9DR"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+ 
+        var dbRef = firebase.database().ref('Client'); 
+       //  document.write('hiiiiiiiiiiiiiiii' + str);
+        
+       
+        var id = document.getElementById('bank');
+        var bank = document.getElementById('id');
+        dbRef.on("value", function(snapshot){
+            snapshot.forEach(function(childSnapshot){
+                var childData = childSnapshot.val();
+                var bank =childData.bankName;
+                var id=childData.clientID;   
+                //console.log(childData);
+                console.log(bank, id); 
+                
+            });
+            var id = document.getElementById('bank');
+            var bank = document.getElementById('id');
+        });
+
+
+        var second = document.getElementById('second');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/applicantincome');
+        dbRef.on('value',snap => second.innerText = snap.val());
+
+        var third = document.getElementById('third');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/credithistory');
+        dbRef.on('value',snap => third.innerText = snap.val());
+
+        var fourth = document.getElementById('fourth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/education');
+        dbRef.on('value',snap => fourth.innerText = snap.val());
+
+        var fifth = document.getElementById('fifth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/gender');
+        dbRef.on('value',snap => fifth.innerText = snap.val());
+
+        var sixth = document.getElementById('sixth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/married');
+        dbRef.on('value',snap => sixth.innerText = snap.val());
+
+        var seventh = document.getElementById('seventh');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/propertyarea');
+        dbRef.on('value',snap => seventh.innerText = snap.val());
+
+        var eighth = document.getElementById('eighth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/selfemployed');
+        dbRef.on('value',snap => eighth.innerText = snap.val());
+
+        var ninth = document.getElementById('ninth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/loanamountterm');
+        dbRef.on('value',snap => ninth.innerText = snap.val());
+
+        var tenth = document.getElementById('tenth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/loanamount');
+        dbRef.on('value',snap => tenth.innerText = snap.val());
+
+        var eleventh = document.getElementById('eleventh');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/loanID');
+        dbRef.on('value',snap => eleventh.innerText = snap.val());
+
+        var twelfth = document.getElementById('twelfth');
+        var dbRef = firebase.database().ref().child('FinancialHistory/0/dependants');
+        dbRef.on('value',snap => twelfth.innerText = snap.val());
+
+
+        var database = firebase.database();
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('Client/' + userId).set({
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+  });
+}
+        </script> 
+ 
+
+        <script src ="fireBase.js"></script>
+        <script src ="main.js"></script>   
+        <script src ="runreport.js"></script>  
+    </body>
+</html>
