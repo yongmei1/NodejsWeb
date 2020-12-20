@@ -19,17 +19,6 @@ scaler = MinMaxScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-print('Max: ', X_train.max())
-print('Min: ', X_train.min())
-
-scaler = MinMaxScaler()
-
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-print('Max: ', X_train.max())
-print('Min: ', X_train.min())
-
 model = Sequential()
 
 model.add(Dense(16, activation='relu'))
@@ -49,16 +38,3 @@ model.fit(x=X_train, y=y_train.values,
 predictions = model.predict(X_test)
 
 print(predictions)
-
-# features of new house
-single_house = df.drop('price', axis=1).iloc[0]
-print(f'Features of new house:\n{single_house}')
-
-# reshape the numpy array and scale the features
-single_house = scaler.transform(single_house.values.reshape(-1, 15))
-
-# run the model and get the price prediction
-print('\nPrediction Price:', model.predict(single_house)[0, 0])
-
-# original price
-print('\nOriginal Price:', df.iloc[0]['price'])

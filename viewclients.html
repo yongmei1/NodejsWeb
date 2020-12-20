@@ -49,7 +49,8 @@
             
           
           <br><br><br>
-        <h3 id = "clientID"></h3>
+        <h3 id = "bank"></h3>
+        <h3 id = "id"></h3>
         <h3 id = "second"></h3>  
         <h3 id = "third"></h3> 
         <h3 id = "fourth"></h3> 
@@ -86,14 +87,24 @@
     
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-
-         
-       // str =  'Client' + id + 'clientID'; 
-      //  var str = id.value;
-        var clientID = document.getElementById('clientID');
-        var dbRef = firebase.database().ref().child('Client/0/clientID');
-        dbRef.on('value',snap => clientID.innerText = snap.val()); 
-      //  document.write('hiiiiiiiiiiiiiiii' + str);
+ 
+        var dbRef = firebase.database().ref('Client'); 
+       //  document.write('hiiiiiiiiiiiiiiii' + str);
+        
+       
+        var id = document.getElementById('bank');
+        var bank = document.getElementById('id');
+        dbRef.on("value", function(snapshot){
+            snapshot.forEach(function(childSnapshot){
+                var childData = childSnapshot.val();
+                var bank =childData.bankName;
+                var id=childData.clientID;   
+                //console.log(childData);
+                console.log(bank, id); 
+            });
+            var id = document.getElementById('bank');
+            var bank = document.getElementById('id');
+        });
 
 
         var second = document.getElementById('second');
