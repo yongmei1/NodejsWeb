@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            html{
+                color:white;
+            }
+            body {
+                background-image: url(/fullbackimage2.JPG);
+                    background-repeat:no-repeat;
+                   background-size:cover;
+            } 
+            h1, div{
+                text-align: center;
+            }
+            .button {
+                background-color: #555555;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                }
+            
+            </style>
+
+        <title>Create/export datasets</title> 
+         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script>    
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>  
+
+    </head>
+
+    <body>
+        <h1>Create/export your datasets</h1> 
+
+        <div> 
+        <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+        </div>
+
+        <script src ="fireBase.js"></script> 
+        <script src ="main.js"></script>  
+        <script src ="runreport.js"></script>  
+    </body>
+</html>
