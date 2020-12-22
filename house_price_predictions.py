@@ -1,3 +1,6 @@
+import sys
+import json 
+
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
@@ -6,6 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
+ 
 df = pd.read_csv('kc_house_data.csv')
 df = df.drop(['id', 'zipcode', 'date', 'lat', 'long'], axis=1)
 
@@ -38,3 +42,9 @@ model.fit(x=X_train, y=y_train.values,
 predictions = model.predict(X_test)
 
 print(predictions)
+
+sys.argv[0] = predictions
+print(sys.argv[0])
+sys.stdout.flush()
+
+ 
