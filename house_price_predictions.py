@@ -1,6 +1,3 @@
-import sys
-import json 
-
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
@@ -37,14 +34,20 @@ model.compile(optimizer='adam', loss='mse')
 
 model.fit(x=X_train, y=y_train.values,
           validation_data=(X_test, y_test.values),
-          batch_size=128, epochs=400)
+          batch_size=1024, epochs=400)
 
 predictions = model.predict(X_test)
 
-print(predictions)
 
-sys.argv[0] = predictions
-print(sys.argv[0])
-sys.stdout.flush()
+single_house = df.drop('price', axis=1).iloc[0]
+print(f'Features of new house:\n{single_house}')
 
+# reshape the numpy array and scale the features
+single_house = scaler.transform(single_house.values.reshape(-1, 15))
+
+# run the model and get the price prediction
+print('\nPrediction Price:', model.predict(single_house)[0, 0])
+
+# original price
+print('\nOriginal Price:', df.iloc[0]['price'])
  
