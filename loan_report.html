@@ -1,8 +1,10 @@
+<!---Yong Mei Chen fin ai Website-->
+
 <html>
     <head>
         <meta charset="UTF-8">
         <style>
-            html{
+            html, a{
                 color: white;
             }
             body {
@@ -10,11 +12,12 @@
                     background-repeat:no-repeat;
                    background-size:cover;
             } 
-            div{
-                float : right;
+            div{ 
+                text-align: center;
             }
             h1{
                 text-align: center;
+                color: black;
             }
             .button {
                 background-color: #555555;
@@ -31,24 +34,44 @@
             
             </style>
 
-        <title>Loan status report Page</title> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>   
+        <title>Loan status report Page</title>   
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script> 
 
+        
+        <script src ="fireBase.js"></script>
+        <script src ="main.js"></script>  
     </head>
 
     <body>
         <h1>Report for loan status</h1> 
         
-        <div>    
+        <div>
+            <button class="button" name="scriptbutton" id="script" value="run script"  onclick = "location.href = 'home.html' ">Home</button>
+            <button class="button" name="Run house report" type="submit" onclick = "location.href = 'house_report.html'; ">House report</button> 
+            <button class="button" name="loan report" type="loan report"  onclick = "location.href = 'loan_report.html'; ">Loan report</button>
+            <button class="button" name="export datasets" type="submit"  onclick = "location.href = 'export_datasets.html'; ">Export datasets</button>
+            <button class="button" name="view clients" id="script" value="view clients"  onclick = "location.href = 'viewclients.html'; ">View Clients</button>
             <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
-        </div><br><br> 
+            <button class="button" name="scriptbutton" id="script" value="run script" onclick = "goPython2()">Generate loan report</button><br> 
+            <script>
+                function goPython2(){
+                    $.ajax({
+                     url: "loans.py",
+                     context: document.body
+                    }).done(function() {
+                     alert('Please duplicate this tab and enter http://localhost:3000/loan to start the loan report '); 
+                    });
+                }
+            </script> 
+            </div><br><br> 
 
-                Client ID number <input id = "userinput"></input>
+                Loan ID number <input id = "userinput"></input>
                 <button onclick= "getValue()"> Get client</button>
         
-        <p id = "demo"></p> 
+        <p id = "demo"></p> <br>
         <h4 id = "loan"></h4> 
         <h4 id = "third"></h4> 
         <h4 id = "fourth"></h4> 
@@ -74,13 +97,14 @@
                 x = document.getElementById("userinput").value;
 
                 if (x != null){
-                    text = 'client '+ x + ' details on the way';
+                    text = 'Client with loan id of '+ x + ' details on the way';
 
+                
                     var loan = document.getElementById('loan');
                     var dbRef = firebase.database().ref().child('Loan/'+x+'/ApplicantIncome');
-                    dbRef.on('value',snap => loan.innerText = 'Clients applicant loan is: '+snap.exportVal());
-                    var x = snap.exportVal();
-                    array.push(x);
+                    dbRef.on('value',snap => loan.innerText = 'Clients applicant income is: '+snap.val());
+                   // var x = snap.exportVal();
+                   // array.push(x);
 
                     var third = document.getElementById('third');
                     var dbRef = firebase.database().ref().child('Loan/'+ x +'/Credit_History');
@@ -99,32 +123,32 @@
 
                     var sixth = document.getElementById('sixth');
                     var dbRef = firebase.database().ref().child('Loan/'+ x +'/Married');
-                    dbRef.on('value',snap => sixth.innerText = 'Client marriage status: '+snap.val());
+                    dbRef.on('value',snap => sixth.innerText = 'Client marriage status is : '+snap.val());
                   //  array.push(snap.val());
 
                     var seventh = document.getElementById('seventh');
                     var dbRef = firebase.database().ref().child('Loan/'+ x +'/Property_Area');
-                    dbRef.on('value',snap => seventh.innerText = 'Clients property area: '+snap.val());
+                    dbRef.on('value',snap => seventh.innerText = 'The property area the client resides in is an : '+snap.val()+' area');
                   //  array.push(snap.val());
 
                     var eighth = document.getElementById('eighth');
                     var dbRef = firebase.database().ref().child('Loan/'+ x +'/Self_Employed');
-                    dbRef.on('value',snap => eighth.innerText = 'Clients employment status: '+snap.val());
+                    dbRef.on('value',snap => eighth.innerText = 'Clients employment status is : '+snap.val());
                   //  array.push(snap.val());
 
                     var ninth = document.getElementById('ninth');
                     var dbRef = firebase.database().ref().child('Loan/'+ x +'/Loan_Amount_Term');
-                    dbRef.on('value',snap => ninth.innerText = 'Clients loan amount term: '+snap.val());
+                    dbRef.on('value',snap => ninth.innerText = 'Clients loan amount term is : '+snap.val());
                   //  array.push(snap.val());
 
                     var tenth = document.getElementById('tenth');
                     var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/LoanAmount');
-                    dbRef.on('value',snap => tenth.innerText = 'Clients loan amount: '+snap.val());
+                    dbRef.on('value',snap => tenth.innerText = 'Clients loan amount is : '+snap.val());
                   //  array.push(snap.val());
 
                     var twelfth = document.getElementById('twelfth');
                     var dbRef = firebase.database().ref().child('Loan/'+ x +'/Dependents');
-                    dbRef.on('value',snap => twelfth.innerText = 'Clients dependants: '+ snap.val());
+                    dbRef.on('value',snap => twelfth.innerText = 'Client has : '+ snap.val() + 'dependents');
                   //  array.push(snap.val());
                     }
 
@@ -164,11 +188,6 @@
             var email = document.getElementById('email');
         });*/
  
-        </script> 
- 
-
-        <script src ="fireBase.js"></script>
-        <script src ="main.js"></script>   
-        <script src ="loan.js"></script>  
+        </script>   
     </body>
 </html>

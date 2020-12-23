@@ -1,3 +1,5 @@
+<!---Yong Mei Chen fin ai Website-->
+
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +16,7 @@
             } 
             h1, div{
                 text-align: center;
+                color: black;
             }
             .button {
                 background-color: #555555;
@@ -30,17 +33,45 @@
             
             </style>
 
-        <title>Create/export datasets</title> 
+        <title>Export datasets</title> 
          <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script>    
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>  
-
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        
     </head>
 
     <body>
-        <h1>Create/export your datasets</h1> 
+        <h1>Export new datasets</h1> 
 
         <div> 
-        <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+            <button class="button" name="scriptbutton" id="script" value="run script"  onclick = "location.href = 'home.html' ">Home</button>
+            <button class="button" name="Run house report" type="submit" onclick = "location.href = 'house_report.html'; ">House report</button> 
+            <button class="button" name="loan report" type="loan report"  onclick = "location.href = 'loan_report.html'; ">Loan report</button>
+            <button class="button" name="export datasets" type="submit"  onclick = "location.href = 'export_datasets.html'; ">Export datasets</button>
+            <button class="button" name="view clients" id="script" value="view clients"  onclick = "location.href = 'viewclients.html'; ">View Clients</button>
+            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+            <br><br><br><br>
+            <button onclick = "goPython()" onclick = "location.href = 'blankloan.csv'; "> Export new loan datasets </button>
+            <button onclick = "goPython2()" onclick = "location.href = 'blankhouse.csv'; "> Export new house datasets </button>
+
+            <script>
+                function goPython(){
+                    $.ajax({
+                     url: "blankhouse.csv",
+                     context: document.body
+                    }).done(function() {
+                     alert('House datasets exported in form of csv '); 
+                    });
+                }
+                function goPython2(){
+                    $.ajax({
+                     url: "blankloan.csv",
+                     context: document.body
+                    }).done(function() {
+                     alert('Loan datasets exported in form of csv '); 
+                    });
+                }
+            </script> 
         </div>
 
         <script src ="fireBase.js"></script> 

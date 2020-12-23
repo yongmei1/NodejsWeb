@@ -1,0 +1,108 @@
+<!---Yong Mei Chen fin ai Website-->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            html{
+                color: white;
+            }
+            body {
+                background-image: url(/fullbackimage2.JPG);
+                    background-repeat:no-repeat;
+                   background-size:cover;
+            } 
+            div{ 
+                text-align: center;
+            }
+            h1{
+                text-align: center;
+                color: black;
+            }
+            .button {
+                background-color: #555555;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                }
+            
+            </style>
+
+        <title>House price predictions Page</title>   
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>  
+        
+        <script src ="fireBase.js"></script>
+        <script src ="main.js"></script>   
+
+    </head>
+
+    <body>
+        <h1>Report for house price predictions</h1> 
+        
+        <div>
+            <button class="button" name="scriptbutton" id="script" value="run script"  onclick = "location.href = 'home.html' ">Home</button>
+            <button class="button" name="Run house report" type="submit" onclick = "location.href = 'house_report.html'; ">House report</button> 
+            <button class="button" name="loan report" type="loan report"  onclick = "location.href = 'loan_report.html'; ">Loan report</button>
+            <button class="button" name="export datasets" type="submit"  onclick = "location.href = 'export_datasets.html'; ">Export datasets</button>
+            <button class="button" name="view clients" id="script" value="view clients"  onclick = "location.href = 'viewclients.html'; ">View Clients</button>
+            <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+            
+        </div><br><br> 
+
+                House ID number <input id = "userinput"></input>
+                <button onclick= "getValue()"> Get client</button>
+         
+        <p id = "demo"></p><br>
+        <h4 id = "second"></h4>  
+        <h4 id = "third"></h4>  
+  
+
+        <script> 
+            function getValue(){ 
+                var x, text;
+                x = document.getElementById("userinput").value;
+
+                if (x != null){
+
+                    text = 'Details of specified client id '+ x + ' is shown below:';
+ 
+
+                    var second = document.getElementById('second');
+                    var dbRef = firebase.database().ref().child('Client/'+ x +'/username');
+                    dbRef.on('value',snap => second.innerText = 'Clients username : '+snap.val());
+
+                    var third = document.getElementById('third');
+                    var dbRef = firebase.database().ref().child('Client/'+ x +'/email');
+                    dbRef.on('value',snap => third.innerText = 'Clients email : '+snap.val());
+
+                        }
+                        document.getElementById("demo").innerHTML = text;  
+                    }
+     
+        var firebaseConfig = {
+            apiKey: "AIzaSyACPL6AK5ais6oLbrRi7VIb3VLW1lSeCNU",
+            authDomain: "finaisystem.firebaseapp.com",
+            databaseURL: "https://finaisystem.firebaseio.com",
+            projectId: "finaisystem",
+            storageBucket: "finaisystem.appspot.com",
+            messagingSenderId: "248168444493",
+            appId: "1:248168444493:web:ed04ddf7469898c0a82204",
+            measurementId: "G-5DTT5JN9DR"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var dbRef = firebase.database().ref('Client');
+        </script> 
+  
+    </body>
+</html>

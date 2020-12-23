@@ -1,3 +1,5 @@
+<!---Yong Mei Chen fin ai Website-->
+
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +16,7 @@
             } 
             h1, div{
                 text-align: center;
+                color: black;
             }
             .button {
                 background-color: #555555;
@@ -40,14 +43,20 @@
         <h1>Welcome to the Home Page of Fin AI</h1> 
 
         <div>
+        <button class="button" name="scriptbutton" id="script" value="run script"  onclick = "location.href = 'home.html' ">Home</button>
         <button class="button" name="Run house report" type="submit" onclick = "location.href = 'house_report.html'; ">House report</button> 
-        <button class="button" name="Create/export datasets" type="submit"  onclick = "location.href = 'export_datasets.html' ">Create + export datasets</button>
-        <button class="button" name="View clients" type="submit"  onclick = "location.href = 'loan_report.html'; ">Loan report</button>
+        <button class="button" name="loan report" type="loan report"  onclick = "location.href = 'loan_report.html'; ">Loan report</button>
+        <button class="button" name="export datasets" type="submit"  onclick = "location.href = 'export_datasets.html'; ">Export datasets</button>
+        <button class="button" name="view clients" id="script" value="view clients"  onclick = "location.href = 'viewclients.html'; ">View Clients</button>
         <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
+
+        <br><br><br><br><br><br><br>
+        <img src="http://i.stack.imgur.com/SBv4T.gif" alt="this slowpoke moves"  width=250/>
         </div>
 
+        
+
         <script src ="fireBase.js"></script> 
-        <script src ="main.js"></script>  
-        <script src ="runreport.js"></script>  
+        <script src ="main.js"></script>   
     </body>
 </html>

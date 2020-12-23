@@ -1,3 +1,5 @@
+<!---Yong Mei Chen fin ai Website-->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -10,11 +12,12 @@
                     background-repeat:no-repeat;
                    background-size:cover;
             } 
-            div{
-                float : right;
+            div{ 
+                text-align: center;
             }
             h1{
                 text-align: center;
+                color: black;
             }
             .button {
                 background-color: #555555;
@@ -31,22 +34,28 @@
             
             </style>
 
-        <title>House price predictions Page</title> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>   
+        <title>House price predictions Page</title>   
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> 
-         
         <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-        <script type = "text/javascript" src ="startup.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script> 
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>  
+        
+        <script src ="fireBase.js"></script>
+        <script src ="main.js"></script>   
 
     </head>
 
     <body>
         <h1>Report for house price predictions</h1> 
         
-        <div>    
+        <div>
+            <button class="button" name="scriptbutton" id="script" value="run script"  onclick = "location.href = 'home.html' ">Home</button>
+            <button class="button" name="Run house report" type="submit" onclick = "location.href = 'house_report.html'; ">House report</button> 
+            <button class="button" name="loan report" type="loan report"  onclick = "location.href = 'loan_report.html'; ">Loan report</button>
+            <button class="button" name="export datasets" type="submit"  onclick = "location.href = 'export_datasets.html'; ">Export datasets</button>
+            <button class="button" name="view clients" id="script" value="view clients"  onclick = "location.href = 'viewclients.html'; ">View Clients</button>
             <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
-           <button class="button" name="scriptbutton" id="script" value="run script" onclick = "myfunction()">Generate house prices</button><br>  
+            <button class="button" name="scriptbutton" id="script" value="run script" onclick = "goPython()">Generate house prices</button><br>   
 
             <script>
                 function goPython(){
@@ -54,17 +63,17 @@
                      url: "house_price_predictions.py",
                      context: document.body
                     }).done(function() {
-                     alert('finished python script'); 
+                     alert('Please duplicate this tab and enter http://localhost:3000/house to start the house prices generator '); 
                     });
                 }
             </script> 
             
         </div><br><br> 
 
-                Client ID number <input id = "userinput"></input>
+                House ID number <input id = "userinput"></input>
                 <button onclick= "getValue()"> Get client</button>
          
-        <p id = "demo"></p>
+        <p id = "demo"></p><br>
         <h4 id = "second"></h4>  
         <h4 id = "third"></h4> 
         <h4 id = "fourth"></h4> 
@@ -84,48 +93,68 @@
 
                 if (x != null){
 
-                    text = 'client '+ x + ' details on the way';
+                    text = 'The House details for house id '+ x + ' is shown below:';
  
 
                     var second = document.getElementById('second');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/applicantincome');
-                    dbRef.on('value',snap => second.innerText = 'Clients applicant income is: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/bathrooms');
+                    dbRef.on('value',snap => second.innerText = 'Number of bathrooms in this house is : '+snap.val());
 
                     var third = document.getElementById('third');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/credithistory');
-                    dbRef.on('value',snap => third.innerText = 'Clients credit history is: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/bedrooms');
+                    dbRef.on('value',snap => third.innerText = 'Number of bedrooms in this house is: '+snap.val());
 
                     var fourth = document.getElementById('fourth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/education');
-                    dbRef.on('value',snap => fourth.innerText = 'Client education status is: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/condition');
+                    dbRef.on('value',snap => fourth.innerText = 'Condition of this house is: '+snap.val());
 
                     var fifth = document.getElementById('fifth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/gender');
-                    dbRef.on('value',snap => fifth.innerText = 'Clients gender is: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/floors');
+                    dbRef.on('value',snap => fifth.innerText = 'Number of floors in this house is: '+snap.val());
 
                     var sixth = document.getElementById('sixth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/married');
-                    dbRef.on('value',snap => sixth.innerText = 'Client marriage status: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/grade');
+                    dbRef.on('value',snap => sixth.innerText = 'Grade given to this house is : '+snap.val());
 
                     var seventh = document.getElementById('seventh');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/propertyarea');
-                    dbRef.on('value',snap => seventh.innerText = 'Clients property area: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/house_view');
+                    dbRef.on('value',snap => seventh.innerText = 'Number of house views for this house is : '+snap.val());
 
                     var eighth = document.getElementById('eighth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/selfemployed');
-                    dbRef.on('value',snap => eighth.innerText = 'Clients employment status: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/price');
+                    dbRef.on('value',snap => eighth.innerText = 'Price for this house is : '+snap.val());
 
                     var ninth = document.getElementById('ninth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/loanamountterm');
-                    dbRef.on('value',snap => ninth.innerText = 'Clients loan amount term: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/sqft_above');
+                    dbRef.on('value',snap => ninth.innerText = 'Squarefoot above of this house is : '+snap.val());
 
                     var tenth = document.getElementById('tenth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/loanamount');
-                    dbRef.on('value',snap => tenth.innerText = 'Clients loan amount: '+snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/sqft_basement');
+                    dbRef.on('value',snap => tenth.innerText = 'Squarefoot basement of this house is : '+snap.val());
 
                     var twelfth = document.getElementById('twelfth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/dependants');
-                    dbRef.on('value',snap => twelfth.innerText = 'Clients dependants: '+ snap.val());
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/sqft_living');
+                    dbRef.on('value',snap => twelfth.innerText = 'Squarefoot living space for this house is : '+ snap.val());
+
+                    var tenth = document.getElementById('tenth');
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/sqft_lot');
+                    dbRef.on('value',snap => tenth.innerText = 'Squarefoot lot for this house is : '+snap.val());
+
+
+                    var tenth = document.getElementById('tenth');
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/waterfront');
+                    dbRef.on('value',snap => tenth.innerText = 'Number of waterfronts for this house is : '+snap.val());
+
+
+                    var tenth = document.getElementById('tenth');
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/year_built');
+                    dbRef.on('value',snap => tenth.innerText = 'This house was built in : '+snap.val());
+
+
+                    var tenth = document.getElementById('tenth');
+                    var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/year_renovated');
+                    dbRef.on('value',snap => tenth.innerText = 'This house was renovated in : '+snap.val());
+
                         }
                         document.getElementById("demo").innerHTML = text;  
                     }
@@ -146,8 +175,6 @@
 
         var dbRef = firebase.database().ref('Client');
         </script> 
- 
-        <script src ="fireBase.js"></script>
-        <script src ="main.js"></script>    
+  
     </body>
 </html>
