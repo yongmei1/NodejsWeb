@@ -15,10 +15,6 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
-
   app_fireBase = firebase;
-
-
-  
 
 })()

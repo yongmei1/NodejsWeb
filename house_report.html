@@ -52,10 +52,10 @@
             <script>
                 function goPython(){
                     $.ajax({
-                      url: "house_price_predictions.py",
+                     url: "house_price_predictions.py",
                      context: document.body
                     }).done(function() {
-                     alert('finished python script');;
+                     alert('finished python script');
                     });
                 }
             </script>
@@ -65,9 +65,7 @@
                 Client ID number <input id = "userinput"></input>
                 <button onclick= "getValue()"> Get client</button>
         
-        
-                <p id = "demo"></p>
-   
+        <p id = "demo"></p>
         <h4 id = "second"></h4>  
         <h4 id = "third"></h4> 
         <h4 id = "fourth"></h4> 
@@ -81,7 +79,6 @@
   
 
         <script> 
-
             function getValue(){ 
                 var x, text;
                 x = document.getElementById("userinput").value;
@@ -148,7 +145,6 @@
         var dbRef = firebase.database().ref('Client');
         </script> 
  
-
         <script src ="fireBase.js"></script>
         <script src ="main.js"></script>    
     </body>
