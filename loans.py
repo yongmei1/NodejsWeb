@@ -44,3 +44,5 @@ pred = loaded_model.predict(testdf)
 
 # printing the predictions
 print(pred)
+
+print("\n\nPredictions : "+pred[0])

@@ -70,8 +70,11 @@
         </div><br><br> 
 
                 House ID number <input id = "userinput"></input>
-                <button onclick= "getValue()"> Get client</button>
+                <button onclick= "getValue()"> Get client</button><br><br>
          
+                Enter result from house prices generator <input id = "priceresult"></input>
+                <button onclick= "pushResult()"> Submit result</button>
+
         <p id = "demo"></p><br>
         <h4 id = "second"></h4>  
         <h4 id = "third"></h4> 
@@ -86,15 +89,14 @@
   
 
         <script> 
+            var x, text;
             function getValue(){ 
-                var x, text;
+                
                 x = document.getElementById("userinput").value;
 
                 if (x != null){
 
                     text = 'The House details for house id '+ x + ' is shown below:';
- 
-
                     var second = document.getElementById('second');
                     var dbRef = firebase.database().ref().child('HouseSpecification/'+ x +'/bathrooms');
                     dbRef.on('value',snap => second.innerText = 'Number of bathrooms in this house is : '+snap.val());
@@ -157,6 +159,16 @@
                         }
                         document.getElementById("demo").innerHTML = text;  
                     }
+
+       
+        function pushResult(){
+            
+            result = document.getElementById("priceresult").value;
+            firebase.database().ref('HouseSpecification/' + x +'/Price').set({
+          // Price : result
+          result
+           });
+       }
      
         var firebaseConfig = {
             apiKey: "AIzaSyACPL6AK5ais6oLbrRi7VIb3VLW1lSeCNU",

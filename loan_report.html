@@ -16,7 +16,7 @@
                 text-align: center;
             }
             h1{
-                text-align: center; 
+                text-align: center;
             }
             .button {
                 background-color: #555555;
@@ -61,6 +61,7 @@
                      url: "loans.py",
                      context: document.body
                     }).done(function() {
+                        //no need to duplicate just copying and pasting the address into another tab will do the trick
                      alert('Please duplicate this tab and enter http://localhost:3000/loan to start the loan report '); 
                     });
                 }
@@ -68,7 +69,10 @@
             </div><br><br> 
 
                 Loan ID number <input id = "userinput"></input>
-                <button onclick= "getValue()"> Get client</button>
+                <button onclick= "getValue()"> Get client</button><br><br>
+
+                Enter result from loan generator <input id = "loanresult"></input>
+                <button onclick= "pushResult()"> Submit result</button>
         
         <p id = "demo"></p> <br>
         <h4 id = "loan"></h4> 
@@ -89,18 +93,16 @@
   
 
         <script> 
-
+            var x, text, result;
             function getValue(){  
                 const array = [];
-                var x, text;
+                //var x, text;
                 x = document.getElementById("userinput").value;
 
                 if (x != null){
                     text = 'Client with loan id of '+ x + ' details on the way';
-
-                
                     var loan = document.getElementById('loan');
-                    var dbRef = firebase.database().ref().child('Loan/'+x+'/ApplicantIncome');
+                    var dbRef = firebase.database().ref().child('Loan/'+x+'/Applicant_Income');
                     dbRef.on('value',snap => loan.innerText = 'Clients applicant income is: '+snap.val());
                    // var x = snap.exportVal();
                    // array.push(x);
@@ -141,7 +143,7 @@
                   //  array.push(snap.val());
 
                     var tenth = document.getElementById('tenth');
-                    var dbRef = firebase.database().ref().child('FinancialHistory/'+ x +'/LoanAmount');
+                    var dbRef = firebase.database().ref().child('Loan/'+ x +'/Loan_Amount');
                     dbRef.on('value',snap => tenth.innerText = 'Clients loan amount is : '+snap.val());
                   //  array.push(snap.val());
 
@@ -156,7 +158,16 @@
             console. log(array[i])  
             }*/
         }
-     
+
+        function pushResult(){
+            result = document.getElementById("loanresult").value; 
+            firebase.database().ref('Loan/' + x +'/Loan_Status').set({
+           // Loan_Status : result
+           result
+            });
+        }
+
+
         var firebaseConfig = {
             apiKey: "AIzaSyACPL6AK5ais6oLbrRi7VIb3VLW1lSeCNU",
             authDomain: "finaisystem.firebaseapp.com",

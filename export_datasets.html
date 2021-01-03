@@ -49,32 +49,29 @@
             <button class="button" name="export datasets" type="submit"  onclick = "location.href = 'export_datasets.html'; ">Export datasets</button>
             <button class="button" name="view clients" id="script" value="view clients"  onclick = "location.href = 'viewclients.html'; ">View Clients</button>
             <button class="button" name="Log Out" type="submit" value="Log Out" onclick = "mainApp.logOut()">Log Out</button>
-            <br><br><br><br>
-            <button onclick = "goPython()" onclick = "location.href = 'blankloan.csv'; "> Export new loan datasets </button>
-            <button onclick = "goPython2()" onclick = "location.href = 'blankhouse.csv'; "> Export new house datasets </button>
+            <br><br><br><br> <!--export database as a whole-->
+            <button onclick = "goPython()" > Export datasets</button> 
 
             <script>
-                function goPython(){
-                    $.ajax({
-                     url: "blankhouse.csv",
-                     context: document.body
-                    }).done(function() {
-                     alert('House datasets exported in form of csv '); 
-                    });
-                }
-                function goPython2(){
-                    $.ajax({
-                     url: "blankloan.csv",
-                     context: document.body
-                    }).done(function() {
-                     alert('Loan datasets exported in form of csv '); 
-                    });
+                function goPython(){ 
+                
+                    var json = json3.items
+                    var fields = Object.keys(json[0])
+                    var replacer = function(key, value) { return value === null ? '' : value } 
+                    var csv = json.map(function(row){
+                    return fields.map(function(fieldName){
+                        return JSON.stringify(row[fieldName], replacer)
+                    }).join(',')
+                    })
+                    csv.unshift(fields.join(',')) // add header column
+                    csv = csv.join('\r\n');
+                    console.log(csv)
+                    
                 }
             </script> 
         </div>
 
         <script src ="fireBase.js"></script> 
-        <script src ="main.js"></script>  
-        <script src ="runreport.js"></script>  
+        <script src ="main.js"></script>   
     </body>
 </html>
